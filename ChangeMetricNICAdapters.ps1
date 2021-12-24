@@ -18,7 +18,7 @@
   None
 
 .OUTPUTS
-  Log file: pslog_Set-NIC-Metric.txt.txt
+  Log file: pslog_Set-NIC-Metric.txt
   
 .NOTES
 
@@ -46,7 +46,7 @@ Start-Transcript $logPath -Append -Force
 	Write-Output "Change Metric" 
 	Get-NetIPInterface LAN* | Set-NetIPInterface -InterFaceMetric 35
 	# Get-NetIPInterface Ethernet* | Set-NetIPInterface -InterFaceMetric 50
-	# Get-NetIPInterface Wi-F* | Set-NetIPInterface -InterFaceMetric 55
+	Get-NetIPInterface Wi-F* | Set-NetIPInterface -InterFaceMetric 40
 	# Get-NetIPInterface Mobi* | Set-NetIPInterface -InterFaceMetric 55
 	# Get-NetIPInterface Blue* | Set-NetIPInterface -InterFaceMetric 65
     Write-Output "-------------------------------------------------------------------"
