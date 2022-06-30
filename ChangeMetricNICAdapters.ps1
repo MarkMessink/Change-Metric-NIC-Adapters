@@ -27,6 +27,9 @@
 
 #>
 
+# Prevent teminating script on error
+$ErrorActionPreference = 'Continue'
+
 # Aanmaken standaard logpath (als deze nog niet bestaat)
 $path = "C:\IntuneLogs"
 If(!(test-path $path))
@@ -38,6 +41,9 @@ $logPath = "$path\pslog_Set-NIC-Metric.txt"
 
 #Start logging
 Start-Transcript $logPath -Append -Force
+
+#Start script timer
+$scripttimer = [system.diagnostics.stopwatch]::StartNew()
 
 	Write-Output "-------------------------------------------------------------------"
     Write-Output "List Network Adapters"
@@ -53,6 +59,13 @@ Start-Transcript $logPath -Append -Force
 	Write-Output "List Network Adapters"
 	Get-NetIPInterface | FT InterfaceAlias, InterfaceMetric
 	Write-Output "-------------------------------------------------------------------"
+
+#Stop and display script timer
+$scripttimer.Stop()
+Write-Output "-------------------------------------------------------------------"
+Write-Output "Script elapsed time in seconds:"
+$scripttimer.elapsed.totalseconds
+Write-Output "-------------------------------------------------------------------"
 
 #Stop Logging
 Stop-Transcript
